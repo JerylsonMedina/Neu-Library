@@ -18,5 +18,9 @@ export default defineConfig(({mode}) => {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
+    build: {
+      outDir: 'dist',  // Explicitly set output directory
+      emptyOutDir: true, // Clean before building
+    },
   };
 });
