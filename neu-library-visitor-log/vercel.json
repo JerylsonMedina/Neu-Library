@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd neu-library-visitor-log && npm run build",
-  "outputDirectory": "neu-library-visitor-log/dist",
-  "installCommand": "cd neu-library-visitor-log && npm install",
-  "rootDirectory": "neu-library-visitor-log"
-}
