@@ -1,0 +1,94 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: visits
+// Document ID: auto-generated
+// Fields:
+//   - uid: string (required) - The unique ID of the visitor.
+//   - name: string (required) - The display name of the visitor.
+//   - email: string (required) - The institutional email of the visitor.
+//   - rfid: string (optional) - The RFID scanner input.
+//   - category: string (required) - The category of the visitor (Student, Employee, Visitor).
+//   - department: string (required) - The department of the visitor.
+//   - program: string (required) - The academic program of the visitor.
+//   - reason: string (required) - The reason for the visit (Reading, Researching, Use of Computer, Meeting).
+//   - timeIn: timestamp (required) - The timestamp when the visitor checked in.
+//   - date: string (required) - The date of the visit (YYYY-MM-DD).
+//
+// Collection: blockedUsers
+// Document ID: uid
+// Fields:
+//   - uid: string (required) - The unique ID of the blocked user.
+//   - email: string (required) - The email of the blocked user.
+//   - blockedAt: timestamp (required) - The timestamp when the user was blocked.
+//
+// ===============================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+       return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (
+          (request.auth.token.email.lower() == "jcesperanza@neu.edu.ph") || 
+          (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+        );
+    }
+
+    match /test/connection {
+      allow read: if isAuthenticated();
+    }
+
+    function isNotBlocked() {
+      return !exists(/databases/$(database)/documents/blockedUsers/$(request.auth.uid));
+    }
+
+    function isValidVisit(data) {
+      return data.keys().hasAll(['uid', 'name', 'email', 'category', 'department', 'program', 'reason', 'timeIn', 'date']) &&
+             data.uid == request.auth.uid &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.email is string && data.email.size() > 0 && data.email.size() < 100 &&
+             data.category in ['Student', 'Employee', 'Visitor'] &&
+             data.reason in ['Reading', 'Researching', 'Use of Computer', 'Meeting'] &&
+             data.timeIn is timestamp &&
+             data.date is string && data.date.matches("^\\d{4}-\\d{2}-\\d{2}$");
+    }
+
+    function isValidBlockedUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'blockedAt']) &&
+             data.uid is string && data.uid.size() > 0 &&
+             data.email is string && data.email.size() > 0 &&
+             data.blockedAt is timestamp;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /visits/{visitId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated() && isNotBlocked() && isValidVisit(request.resource.data);
+    }
+
+    match /blockedUsers/{uid} {
+      allow read: if isAdmin() || (isAuthenticated() && request.auth.uid == uid);
+      allow create, update: if isAdmin() && isValidBlockedUser(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /users/{uid} {
+      allow read: if isAuthenticated() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+  }
+}

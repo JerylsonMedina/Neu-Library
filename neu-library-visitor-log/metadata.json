@@ -1,0 +1,5 @@
+{
+  "name": "NEU Library Visitor Log",
+  "description": "A kiosk-style web application for recording library visitors with RBAC and real-time monitoring.",
+  "requestFramePermissions": []
+}

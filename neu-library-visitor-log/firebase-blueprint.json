@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "Visit": {
+      "title": "Visit",
+      "description": "A record of a library visitor entry.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique ID of the visitor." },
+        "name": { "type": "string", "description": "The display name of the visitor." },
+        "email": { "type": "string", "description": "The institutional email of the visitor." },
+        "rfid": { "type": "string", "description": "The RFID scanner input (optional)." },
+        "category": { "type": "string", "enum": ["Student", "Employee", "Visitor"], "description": "The category of the visitor." },
+        "department": { "type": "string", "description": "The department of the visitor." },
+        "program": { "type": "string", "description": "The academic program of the visitor." },
+        "reason": { "type": "string", "enum": ["Reading", "Researching", "Use of Computer", "Meeting"], "description": "The reason for the visit." },
+        "timeIn": { "type": "string", "format": "date-time", "description": "The timestamp when the visitor checked in." },
+        "date": { "type": "string", "description": "The date of the visit (YYYY-MM-DD)." }
+      },
+      "required": ["uid", "name", "email", "category", "department", "program", "reason", "timeIn", "date"]
+    },
+    "BlockedUser": {
+      "title": "BlockedUser",
+      "description": "A record of a blocked user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique ID of the blocked user." },
+        "email": { "type": "string", "description": "The email of the blocked user." },
+        "blockedAt": { "type": "string", "format": "date-time", "description": "The timestamp when the user was blocked." }
+      },
+      "required": ["uid", "email", "blockedAt"]
+    }
+  },
+  "firestore": {
+    "visits": {
+      "schema": "Visit",
+      "description": "Collection of visitor check-in records."
+    },
+    "blockedUsers": {
+      "schema": "BlockedUser",
+      "description": "Collection of users who are blocked from using the library."
+    }
+  }
+}

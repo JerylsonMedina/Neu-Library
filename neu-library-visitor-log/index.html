@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEU Library Visitor Log</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    <div id="app">
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen flex items-center justify-center min-h-screen p-4">
+            <div class="card max-w-md w-full p-10 text-center shadow-2xl border-t-8 border-neu-green">
+                <div class="mb-10">
+                    <div class="w-24 h-24 bg-neu-green rounded-full mx-auto flex items-center justify-center mb-6 shadow-xl border-4 border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h1 class="text-4xl font-black text-gray-900 tracking-tight mb-1">NEW ERA UNIVERSITY</h1>
+                    <p class="text-neu-green font-bold tracking-widest uppercase text-xs mb-4">Library Visitor Log</p>
+                    <div class="h-1 w-20 bg-neu-gold mx-auto rounded-full"></div>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm text-gray-500 mb-6">Please sign in using your institutional email.</p>
+                    <button id="btn-visitor-login" class="btn-primary w-full py-4 flex items-center justify-center space-x-3">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                            <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                            <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
+                            <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                        </svg>
+                        <span>Sign in as Visitor Entry</span>
+                    </button>
+                    <button id="btn-admin-login" class="btn-outline w-full py-4 flex items-center justify-center space-x-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <span>Sign in as Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visitor Screen -->
+        <div id="visitor-screen" class="screen hidden min-h-screen p-4 md:p-8 bg-gray-50">
+            <div class="max-w-2xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-neu-green rounded-xl flex items-center justify-center shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-neu-green">Visitor Entry</h2>
+                            <p class="text-sm text-gray-500">Welcome to NEU Library</p>
+                        </div>
+                    </div>
+                    <div id="admin-switch-container" class="hidden">
+                        <button id="btn-switch-to-admin" class="btn-outline px-4 py-2 text-sm">Admin Dashboard</button>
+                    </div>
+                </div>
+
+                <form id="visitor-form" class="card p-8 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="label">Full Name</label>
+                            <input type="text" id="visitor-name" class="input bg-gray-100 cursor-not-allowed" readonly>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="label">Institutional Email</label>
+                            <input type="email" id="visitor-email" class="input bg-gray-100 cursor-not-allowed" readonly>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="label">RFID (Optional - Scan Now)</label>
+                        <input type="text" id="visitor-rfid" class="input" placeholder="Scan your ID or leave blank">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="space-y-2">
+                            <label class="label">Category</label>
+                            <select id="visitor-category" class="input" required>
+                                <option value="" disabled selected>Select Category</option>
+                                <option value="Student">Student</option>
+                                <option value="Employee">Employee</option>
+                                <option value="Visitor">Visitor</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="label">Department</label>
+                            <select id="visitor-department" class="input" required>
+                                <option value="" disabled selected>Select Department</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="label">Program</label>
+                            <select id="visitor-program" class="input" required>
+                                <option value="" disabled selected>Select Program</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="label">Reason for Visit</label>
+                        <select id="visitor-reason" class="input" required>
+                            <option value="" disabled selected>Select Reason</option>
+                            <option value="Reading">Reading</option>
+                            <option value="Researching">Researching</option>
+                            <option value="Use of Computer">Use of Computer</option>
+                            <option value="Meeting">Meeting</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-full py-4 text-lg font-bold shadow-lg">Submit Entry</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="admin-dashboard" class="screen hidden min-h-screen bg-gray-50">
+            <nav class="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-10">
+                <div class="max-w-7xl mx-auto flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-neu-green rounded-lg flex items-center justify-center shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-bold text-neu-green">Admin Dashboard</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="btn-switch-to-visitor" class="btn-outline px-4 py-2 text-sm">Visitor Mode</button>
+                        <button id="btn-logout" class="text-gray-500 hover:text-red-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-8">
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card p-6 flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Today</p>
+                            <h3 id="stat-today" class="text-2xl font-bold">0</h3>
+                        </div>
+                    </div>
+                    <div class="card p-6 flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">This Week</p>
+                            <h3 id="stat-week" class="text-2xl font-bold">0</h3>
+                        </div>
+                    </div>
+                    <div class="card p-6 flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">This Month</p>
+                            <h3 id="stat-month" class="text-2xl font-bold">0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex space-x-4 border-b border-gray-200">
+                    <button id="tab-logs" class="tab-btn active px-4 py-2 font-bold text-neu-green border-b-2 border-neu-green">Visitor Logs</button>
+                    <button id="tab-blocked" class="tab-btn px-4 py-2 font-bold text-gray-500 hover:text-neu-green transition-colors">Blocked Users</button>
+                </div>
+
+                <!-- Logs Section -->
+                <div id="section-logs" class="admin-section space-y-8">
+                    <div class="card overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 bg-white space-y-4">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div class="relative flex-1 max-w-md">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                    </span>
+                                    <input type="text" id="search-input" class="input pl-10" placeholder="Search by name, program, reason...">
+                                </div>
+                                <button id="btn-export" class="btn-outline px-6 py-2 flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                    <span>Export to PDF</span>
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <select id="filter-category" class="input text-sm">
+                                    <option value="">All Categories</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Employee">Employee</option>
+                                    <option value="Visitor">Visitor</option>
+                                </select>
+                                <select id="filter-department" class="input text-sm">
+                                    <option value="">All Departments</option>
+                                </select>
+                                <select id="filter-program" class="input text-sm">
+                                    <option value="">All Programs</option>
+                                </select>
+                                <select id="filter-reason" class="input text-sm">
+                                    <option value="">All Reasons</option>
+                                    <option value="Reading">Reading</option>
+                                    <option value="Researching">Researching</option>
+                                    <option value="Use of Computer">Use of Computer</option>
+                                    <option value="Meeting">Meeting</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b border-gray-100">
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Visitor</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Details</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Reason</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Time In</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="visitor-table-body" class="divide-y divide-gray-100">
+                                    <!-- Table rows will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blocked Section -->
+                <div id="section-blocked" class="admin-section hidden space-y-8">
+                    <div class="card overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 bg-white">
+                            <h3 class="text-lg font-bold text-gray-900">Blocked Users</h3>
+                            <p class="text-sm text-gray-500">Users in this list are barred from entering the library.</p>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 border-b border-gray-100">
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">User Email</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Blocked At</th>
+                                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="blocked-table-body" class="divide-y divide-gray-100">
+                                    <!-- Blocked users will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast-container" class="fixed bottom-8 right-8 z-[100] flex flex-col space-y-4"></div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirm-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-all duration-300 opacity-0">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 transform scale-90 transition-all duration-300">
+                <h3 id="confirm-title" class="text-xl font-bold text-gray-900 mb-2">Confirm Action</h3>
+                <p id="confirm-message" class="text-gray-600 mb-8">Are you sure you want to proceed with this action?</p>
+                <div class="flex space-x-4">
+                    <button id="confirm-cancel" class="flex-1 px-6 py-3 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors">
+                        Cancel
+                    </button>
+                    <button id="confirm-ok" class="flex-1 px-6 py-3 rounded-xl font-bold text-white bg-red-600 hover:bg-red-700 transition-colors">
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Success Message Overlay -->
+        <div id="success-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
+            <div class="card max-w-sm w-full p-8 text-center transform scale-90 transition-transform duration-300">
+                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full mx-auto flex items-center justify-center mb-6">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h3 id="success-message" class="text-2xl font-bold text-gray-900 mb-2">Welcome!</h3>
+                <p id="success-submessage" class="text-gray-500">Redirecting to login...</p>
+            </div>
+        </div>
+
+        <!-- Blocked Message Overlay -->
+        <div id="blocked-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+            <div class="card max-w-sm w-full p-8 text-center">
+                <div class="w-20 h-20 bg-red-100 text-red-600 rounded-full mx-auto flex items-center justify-center mb-6">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Access Denied</h3>
+                <p class="text-gray-500">You are not allowed to use the library.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neu-green: #006837;
+  --color-neu-gold: #FFD700;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply antialiased min-h-screen relative;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkzEBEYHCAjbhh0TI6ygq3SHNqW-_R3ZDT8A&s');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: "";
+    @apply fixed inset-0 bg-white/85 backdrop-blur-[1px] -z-10;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100;
+  }
+
+  .btn-primary {
+    @apply bg-neu-green text-white rounded-[10px] hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply bg-white text-neu-green border-2 border-neu-green rounded-[10px] hover:bg-neu-green hover:text-white transition-all active:scale-[0.98];
+  }
+
+  .input {
+    @apply w-full border-2 border-gray-100 rounded-[10px] px-4 py-3 focus:border-neu-green focus:outline-none transition-colors;
+  }
+
+  .label {
+    @apply text-sm font-semibold text-gray-700 block mb-1;
+  }
+
+  .screen {
+    @apply transition-all duration-300;
+  }
+
+  .tab-btn.active {
+    @apply text-neu-green border-b-2 border-neu-green;
+  }
+}
+
+/* Custom styles for the success overlay */
+#success-overlay.show {
+    @apply opacity-100;
+}
+
+#success-overlay.show > div {
+    @apply scale-100;
+}
+
+/* Toast Animation */
+#toast-container > div {
+    animation: slide-up 0.3s ease forwards;
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
