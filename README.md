@@ -1,20 +1,43 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# NEU Library Visitor Log
 
-# Run and deploy your AI Studio app
+The **NEU Library Visitor Log** is a kiosk-based web application developed to modernize the library’s visitor registration process. Instead of using manual logbooks, students, employees, and guests sign in using their institutional Google accounts, provide visit details, and are automatically recorded in a real-time database.
 
-This contains everything you need to run your app locally.
+The system is designed for shared kiosk environments, allowing fast visitor entry while giving administrators access to monitoring tools, analytics, and user management features through a dedicated dashboard.
 
-View your app in AI Studio: https://ai.studio/apps/7e76f675-c72a-4fd0-a39d-e75722bec12b
+ **Live Site:**  
+https://ais-pre-neoqn7ztbhiwrbzttfn65f-350130303039.asia-southeast1.run.app
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## Features
 
+-  Secure Google Sign-In using institutional accounts
+-  Automated visitor registration with predefined Department and Program fields
+-  Visit purpose selection (Reading, Research, Computer Use, Meeting)
+-  Auto-filled user information from Google authentication
+-  Kiosk workflow with automatic logout after submission
+-  Blocked user detection and access restriction
+-  Admin dashboard with real-time statistics:
+  - Today
+  - This Week
+  - This Month
+-  Live visitor log with search and multi-filter options
+-  User management (block users)
+-  Export filtered visitor records to PDF
+-  Responsive dashboard-style interface
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+##  My Role & Contributions
+
+This project was designed and developed as a **full-stack Firebase web application**. My responsibilities included:
+
+- Designing the kiosk-based user flow and application architecture
+- Implementing Google Authentication using Firebase Auth
+- Developing Role-Based Access Control (Visitor and Admin modes)
+- Creating the visitor entry interface with automated data handling
+- Building a real-time admin dashboard using Firestore listeners
+- Implementing search, filtering, and statistics computation
+- Developing the auto logout mechanism for kiosk operation
+- Integrating PDF export functionality using jsPDF
+- Designing a responsive enterprise-style user interface
